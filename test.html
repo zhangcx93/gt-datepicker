@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>DatePicker Test Page</title>
+  <link rel="stylesheet" href="src/style.css"/>
 </head>
 <body>
 
@@ -11,8 +12,8 @@
 </div>
 
 <script src="../bower_components/angular/angular.min.js"></script>
-<!--<script src="./src/date-picker.js"></script>-->
-<script src="./dist/datepicker.js"></script>
+<script src="./src/date-picker.js"></script>
+<!--<script src="./dist/datepicker.min.js"></script>-->
 <script>
   angular.module('myApp', [
     'gtDatePicker'
@@ -28,69 +29,6 @@
 //    }, 2000);
   })
 </script>
-
-<style>
-  body {
-    background-color: #fffbe3;
-  }
-  .date-picker {
-    position: relative;
-  }
-  .date-picker .date-picker-content {
-    position: absolute;
-    top: 1em;
-    left: 0;
-    padding: 1em;
-    width: 33em;
-    background-color: #fff;
-  }
-  .date-picker .date-number, .date-picker .day-item-title {
-    box-sizing: border-box;
-    vertical-align: middle;
-    display: inline-block;
-    width: 2em;
-    overflow: hidden;
-    text-align: center;
-  }
-  .date-picker .date-number.active{
-    background-color: #a7cfb7;
-  }
-  .date-picker .date-number.disabled {
-    background-color: #c3c3c3;
-  }
-  .date-picker .date-number.today {
-    border: 1px solid #e28194;
-  }
-
-  .date-picker .month-wrap {
-    display: inline-block;
-    vertical-align: top;
-    width: 15em;
-    text-align: center;
-  }
-  .date-picker .month-helper {
-    height: 8em;
-    line-height: 8em;
-    display: inline-block;
-    cursor: pointer;
-  }
-  .date-picker .date-picker-bottom {
-    font-size: 0.9em;
-  }
-  .date-picker .bottom-button {
-    float: right;
-    margin-left: 1em;
-  }
-  .date-picker .bottom-button.confirm {
-    color: green;
-  }
-  .date-picker .bottom-button.cancel {
-    color: red;
-  }
-  .date-picker input {
-    width: 6em;
-  }
-</style>
 
 </body>
 </html>

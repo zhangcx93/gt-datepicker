@@ -18,10 +18,41 @@ module.directive("gtDatePicker", ['gtDatePickerConfig', function (config) {
       onChange: "&"
     },
     link: function (scope, element, attrs) {
+      //language support
+      var language = window.navigator.language;
+
+      var buildLocalDay = function () {
+        var locale = [];
+        var d = new Date();
+        try {
+          for (var i = 0; i < 7; i++) {
+            d.setDate(d.getDate() - d.getDay() + i);
+            locale.push(d.toLocaleString(language, {weekday: 'narrow'}));
+          }
+        }
+        catch (e) {
+          return [
+            "Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"
+          ]
+        }
+        return locale
+      };
+
+      scope.monthTitle = buildLocalDay();
+
+      var lang = {
+        'en': ['Confirm', 'Cancel'],
+        'zh-cn': ["取消", '删除']
+      };
+
+      scope.button = lang[language] || lang['en'];
+
+      //toolkit for number format
       var format = function (num) {
         return ('0' + num).slice(-2);
       };
 
+      //Time object, for many time related operation
       var Time = function (date) {
         date = new Date(date);//format what ever stuff
         date.setHours(0, 0, 0, 0);//to begin of day
@@ -45,7 +76,15 @@ module.directive("gtDatePicker", ['gtDatePickerConfig', function (config) {
       };
 
       Time.prototype.getMonth = function () {
-        return this.date.getFullYear() + "-" + format(this.date.getMonth() + 1);
+        try {
+          return this.date.toLocaleString(language, {
+            year: 'numeric',
+            month: 'short'
+          })
+        }
+        catch (e) {
+          return this.date.getFullYear() + "-" + format(this.date.getMonth() + 1);
+        }
       };
 
       Time.prototype.toString = function () {
@@ -100,11 +139,12 @@ module.directive("gtDatePicker", ['gtDatePickerConfig', function (config) {
         return new Time(copy);
       };
 
-      Time.prototype.isToday = function() {
+      Time.prototype.isToday = function () {
         var today = new Time(new Date());
         return this.equal(today);
       };
 
+      //build month array for display
       var buildMonth = function (time) {
         var monthList = [], t;
         for (var i = 0; i < time.firstDay(); i++) {
@@ -125,6 +165,7 @@ module.directive("gtDatePicker", ['gtDatePickerConfig', function (config) {
         return monthList;
       };
 
+      //set month view
       var setView = scope.setView = function (leftDate) {
         leftDate = leftDate || scope.end.lastMonth();
         scope.leftMonth = leftDate;
@@ -133,10 +174,10 @@ module.directive("gtDatePicker", ['gtDatePickerConfig', function (config) {
         scope.nextMonth = buildMonth(leftDate.nextMonth());
       };
 
-      //load template
+      //init: load template, load model
       scope.template = config.template;
 
-      var reset = function() {
+      var reset = function () {
         //load end time
         scope.end = new Time(scope.endModel);
 
@@ -151,12 +192,7 @@ module.directive("gtDatePicker", ['gtDatePickerConfig', function (config) {
 
       reset();
 
-      //scope.month = begin.getMonth();
-
-      scope.monthTitle = [
-        "Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"
-      ];
-
+      //scope utils
       scope.prev = function () {
         setView(scope.leftMonth.lastMonth());
       };
@@ -197,15 +233,17 @@ module.directive("gtDatePicker", ['gtDatePickerConfig', function (config) {
         }
       };
 
-      scope.showPicker = function() {
+      //show/hide on click
+      scope.showPicker = function () {
         scope.show = !scope.show;
       };
 
-      scope.confirm = function() {
+      //submit model change
+      scope.confirm = function () {
         scope.beginModel = scope.begin.toString();
         scope.endModel = scope.end.toString();
         scope.show = false;
-        if(typeof scope.onChange == 'function') {
+        if (typeof scope.onChange == 'function') {
           scope.onChange({
             begin: scope.beginModel,
             end: scope.endModel
@@ -213,55 +251,59 @@ module.directive("gtDatePicker", ['gtDatePickerConfig', function (config) {
         }
       };
 
-      var watched = function() {
+      //cancel
+      scope.cancel = function () {
+        reset();
+        scope.show = false;
+      };
+
+      //watch local model change
+      var watched = function () {
         return scope.begin.toString() + "_" + scope.end.toString();
       };
 
       scope.text = {};
 
-      scope.$watch(watched, function() {
+      scope.$watch(watched, function () {
         scope.text.begin = scope.begin.toString();
         scope.text.end = scope.end.toString();
       });
 
-      var watchedModel = function() {
+      //watch model change
+      var watchedModel = function () {
         return scope.beginModel + "_" + scope.endModel;
       };
 
-      scope.$watch(watchedModel, function() {
+      scope.$watch(watchedModel, function () {
         reset();
       });
 
-      scope.changeBegin = function(text) {
+      //text change handler
+      scope.changeBegin = function (text) {
         var changeBegin = new Time(text);
-        if(changeBegin.date == "Invalid Date") {
+        if (changeBegin.date == "Invalid Date") {
           scope.text.begin = scope.begin.toString();
           return;
         }
-        if(changeBegin.isAfter(scope.end)) {
+        if (changeBegin.isAfter(scope.end)) {
           scope.end = changeBegin;
         }
         scope.begin = changeBegin;
         setView(changeBegin);
       };
 
-      scope.changeEnd = function(text) {
+      scope.changeEnd = function (text) {
         var changeEnd = new Time(text);
-        if(changeEnd.date == "Invalid Date") {
+        if (changeEnd.date == "Invalid Date") {
           scope.text.end = scope.end.toString();
           return;
         }
 
-        if(scope.begin.isAfter(changeEnd)) {
+        if (scope.begin.isAfter(changeEnd)) {
           scope.begin = changeEnd;
         }
         scope.end = changeEnd;
         setView(changeEnd.lastMonth());
-      };
-
-      scope.cancel = function() {
-        reset();
-        scope.show = false;
       };
 
       //end of link

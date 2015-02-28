@@ -9,7 +9,7 @@
     width: 33em;
     background-color: #fff;
 }
-.date-picker .date-number, .date-picker .day-item-title {
+.date-picker .date-number, .date-picker .day-title-item {
     box-sizing: border-box;
     vertical-align: middle;
     display: inline-block;

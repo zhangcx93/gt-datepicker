@@ -16,7 +16,7 @@
     for example:
 
 ```html
-    <div gt-date-picker begin="begin" end="end" on-change="change(begin, end)"></div>
+<div gt-date-picker begin="begin" end="end" on-change="change(begin, end)"></div>
 ```
 
 ```js

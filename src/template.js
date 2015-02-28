@@ -45,8 +45,8 @@ angular.module('gtDatePicker').run(['$templateCache', function($templateCache) {
     "    <div class=\"date-picker-bottom\">\n" +
     "      <input type=\"text\" ng-model=\"text.begin\" ng-click=\"setView(begin)\" ng-blur=\"changeBegin(text.begin)\"> -\n" +
     "      <input type=\"text\" ng-model=\"text.end\" ng-click=\"setView(end.lastMonth())\" ng-blur=\"changeEnd(text.end)\">\n" +
-    "      <div class=\"bottom-button confirm\" ng-click=\"confirm()\">Confirm</div>\n" +
-    "      <div class=\"bottom-button cancel\" ng-click=\"cancel()\">Cancel</div>\n" +
+    "      <div class=\"bottom-button confirm\" ng-click=\"confirm()\">{{ button[0] }}</div>\n" +
+    "      <div class=\"bottom-button cancel\" ng-click=\"cancel()\">{{ button[1] }}</div>\n" +
     "      <div style=\"clear: both\"></div>\n" +
     "    </div>\n" +
     "  </div>\n" +
