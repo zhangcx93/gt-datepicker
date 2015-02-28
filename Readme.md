@@ -15,7 +15,7 @@
     in form of on-change='what-ever-change-fn(begin, end)'
     for example:
 
-'''js
+```js
       <div gt-date-picker begin="begin" end="end" on-change="change(begin, end)"></div>
 
   angular.module('myApp', [
@@ -32,4 +32,4 @@
 //    }, 2000);
 //when model changed from outside, remember to use $scope.$apply() to update the view
   })
-'''
+```
