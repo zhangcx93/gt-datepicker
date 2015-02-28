@@ -42,7 +42,7 @@ module.directive("gtDatePicker", ['gtDatePickerConfig', function (config) {
 
       var lang = {
         'en': ['Confirm', 'Cancel'],
-        'zh-cn': ["取消", '删除']
+        'zh-cn': ["确定", '取消']
       };
 
       scope.button = lang[language] || lang['en'];
