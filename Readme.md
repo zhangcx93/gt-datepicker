@@ -15,9 +15,11 @@
     in form of on-change='what-ever-change-fn(begin, end)'
     for example:
 
-```js
-      <div gt-date-picker begin="begin" end="end" on-change="change(begin, end)"></div>
+```html
+    <div gt-date-picker begin="begin" end="end" on-change="change(begin, end)"></div>
+```
 
+```js
   angular.module('myApp', [
     'gtDatePicker'
   ]).controller('myCtrl', function ($scope) {
