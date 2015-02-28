@@ -1,0 +1,51 @@
+<div class="date-picker">
+  <div class="date-picker-value" ng-click="showPicker()">
+    {{ beginModel }} - {{ endModel }}
+  </div>
+  <div class="date-picker-content" ng-show="show">
+    <div class="date-picker-top">
+      <div class="month-helper" ng-click="prev()">
+        &larr;
+      </div>
+      <div class="month-wrap">
+        <div class="month-title">
+          {{ leftMonth.getMonth() }}
+        </div>
+        <div class="day-title">
+      <span class="day-title-item" ng-repeat="day in monthTitle">
+        {{ day }}
+      </span>
+        </div>
+    <span class="date-number" ng-click="click(day)" ng-mouseover="hover(day)"
+          ng-class="{active: day.isActive(), disabled: day.overflow, today: day.isToday()}" ng-repeat="day in month">
+      {{ day.date.getDate() }}
+    </span>
+      </div>
+      <div class="month-wrap">
+        <div class="month-title">
+          {{ rightMonth.getMonth() }}
+        </div>
+        <div class="day-title">
+      <span class="day-title-item" ng-repeat="day in monthTitle">
+        {{ day }}
+      </span>
+        </div>
+    <span class="date-number" ng-click="click(day)" ng-mouseover="hover(day)"
+          ng-class="{active: day.isActive(), disabled: day.overflow, today: day.isToday()}" ng-repeat="day in nextMonth">
+      {{ day.date.getDate() }}
+    </span>
+      </div>
+      <div class="month-helper" ng-click="next()">
+        &rarr;
+      </div>
+    </div>
+
+    <div class="date-picker-bottom">
+      <input type="text" ng-model="text.begin" ng-click="setView(begin)" ng-blur="changeBegin(text.begin)"/> -
+      <input type="text" ng-model="text.end" ng-click="setView(end.lastMonth())" ng-blur="changeEnd(text.end)"/>
+      <div class="bottom-button confirm" ng-click="confirm()">Confirm</div>
+      <div class="bottom-button cancel" ng-click="cancel()">Cancel</div>
+      <div style="clear: both"></div>
+    </div>
+  </div>
+</div>
