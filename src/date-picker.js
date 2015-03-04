@@ -19,7 +19,7 @@ module.directive("gtDatePicker", ['gtDatePickerConfig', function (config) {
     },
     link: function (scope, element, attrs) {
       //language support
-      var language = window.navigator.language;
+      var language = window.navigator.language.toLowerCase();
 
       var buildLocalDay = function () {
         var locale = [];
