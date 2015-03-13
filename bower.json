@@ -1,0 +1,21 @@
+{
+  "name": "gtDatepicker",
+  "version": "1.0.0",
+  "authors": [
+    "zhangcx93 <zhangcx93@gmail.com>"
+  ],
+  "description": "a angular plugin: range picker made for geetest team",
+  "main": "dist/datepicker.js",
+  "keywords": [
+    "datepicker",
+    "rangepicker"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
