@@ -9,7 +9,7 @@ angular.module('gtDatePicker').run(['$templateCache', function($templateCache) {
     "  <div class=\"date-picker-content\" ng-show=\"show\">\n" +
     "    <div class=\"date-picker-top\">\n" +
     "      <div class=\"month-helper\" ng-click=\"prev()\">\n" +
-    "        &larr;\n" +
+    "        <span class=\"month-helper-left\"></span>\n" +
     "      </div>\n" +
     "      <div class=\"month-wrap\">\n" +
     "        <div class=\"month-title\">\n" +
@@ -38,7 +38,7 @@ angular.module('gtDatePicker').run(['$templateCache', function($templateCache) {
     "    </span>\n" +
     "      </div>\n" +
     "      <div class=\"month-helper\" ng-click=\"next()\">\n" +
-    "        &rarr;\n" +
+    "        <span class=\"month-helper-right\"></span>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "\n" +

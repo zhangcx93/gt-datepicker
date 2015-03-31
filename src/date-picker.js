@@ -15,7 +15,8 @@ module.directive("gtDatePicker", ['gtDatePickerConfig', function (config) {
     scope: {
       beginModel: "=begin",
       endModel: "=end",
-      onChange: "&"
+      onChange: "&",
+      arrow: "=?"
     },
     link: function (scope, element, attrs) {
       //language support
@@ -305,8 +306,11 @@ module.directive("gtDatePicker", ['gtDatePickerConfig', function (config) {
         scope.end = changeEnd;
         setView(changeEnd.lastMonth());
       };
-
       //end of link
+
+      //arrow:
+      scope.arrow = scope.arrow || ['&larr;', '&rarr;'];
+      //end of arrow
     }
   }
 }]);
