@@ -1,6 +1,6 @@
 {
   "name": "gt-datepicker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A handful range picker for Geetest team",
   "main": "dist/datepicker.js",
   "scripts": {

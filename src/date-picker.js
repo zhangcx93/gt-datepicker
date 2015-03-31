@@ -72,6 +72,14 @@ module.directive("gtDatePicker", ['gtDatePickerConfig', function (config) {
         return this.isAfter(scope.begin) && scope.end.isAfter(this);
       };
 
+      Time.prototype.isFirst = function() {
+        return this.equal(scope.begin);
+      };
+
+      Time.prototype.isLast = function() {
+        return this.equal(scope.end);
+      };
+
       Time.prototype.equal = function (other) {
         return this.date.getTime() == other.date.getTime();
       };

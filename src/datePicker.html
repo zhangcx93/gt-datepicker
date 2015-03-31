@@ -17,7 +17,8 @@
       </span>
         </div>
     <span class="date-number" ng-click="click(day)" ng-mouseover="hover(day)"
-          ng-class="{active: day.isActive(), disabled: day.overflow, today: day.isToday()}" ng-repeat="day in month">
+          ng-class="{active: day.isActive(), first: day.isFirst(), last: day.isLast(), disabled: day.overflow, today: day.isToday()}"
+          ng-repeat="day in month">
       {{ day.date.getDate() }}
     </span>
       </div>
@@ -31,7 +32,8 @@
       </span>
         </div>
     <span class="date-number" ng-click="click(day)" ng-mouseover="hover(day)"
-          ng-class="{active: day.isActive(), disabled: day.overflow, today: day.isToday()}" ng-repeat="day in nextMonth">
+          ng-class="{active: day.isActive(), first: day.isFirst(), last: day.isLast(), disabled: day.overflow, today: day.isToday()}"
+          ng-repeat="day in nextMonth">
       {{ day.date.getDate() }}
     </span>
       </div>
@@ -43,6 +45,7 @@
     <div class="date-picker-bottom">
       <input type="text" ng-model="text.begin" ng-click="setView(begin)" ng-blur="changeBegin(text.begin)"/> -
       <input type="text" ng-model="text.end" ng-click="setView(end.lastMonth())" ng-blur="changeEnd(text.end)"/>
+
       <div class="bottom-button confirm" ng-click="confirm()">{{ button[0] }}</div>
       <div class="bottom-button cancel" ng-click="cancel()">{{ button[1] }}</div>
       <div style="clear: both"></div>

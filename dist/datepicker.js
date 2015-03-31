@@ -72,6 +72,14 @@ module.directive("gtDatePicker", ['gtDatePickerConfig', function (config) {
         return this.isAfter(scope.begin) && scope.end.isAfter(this);
       };
 
+      Time.prototype.isFirst = function() {
+        return this.equal(scope.begin);
+      };
+
+      Time.prototype.isLast = function() {
+        return this.equal(scope.end);
+      };
+
       Time.prototype.equal = function (other) {
         return this.date.getTime() == other.date.getTime();
       };
@@ -338,7 +346,7 @@ angular.module('gtDatePicker').run(['$templateCache', function($templateCache) {
     "        {{ day }}\n" +
     "      </span>\n" +
     "        </div>\n" +
-    "    <span class=\"date-number\" ng-click=\"click(day)\" ng-mouseover=\"hover(day)\" ng-class=\"{active: day.isActive(), disabled: day.overflow, today: day.isToday()}\" ng-repeat=\"day in month\">\n" +
+    "    <span class=\"date-number\" ng-click=\"click(day)\" ng-mouseover=\"hover(day)\" ng-class=\"{active: day.isActive(), first: day.isFirst(), last: day.isLast(), disabled: day.overflow, today: day.isToday()}\" ng-repeat=\"day in month\">\n" +
     "      {{ day.date.getDate() }}\n" +
     "    </span>\n" +
     "      </div>\n" +
@@ -351,7 +359,7 @@ angular.module('gtDatePicker').run(['$templateCache', function($templateCache) {
     "        {{ day }}\n" +
     "      </span>\n" +
     "        </div>\n" +
-    "    <span class=\"date-number\" ng-click=\"click(day)\" ng-mouseover=\"hover(day)\" ng-class=\"{active: day.isActive(), disabled: day.overflow, today: day.isToday()}\" ng-repeat=\"day in nextMonth\">\n" +
+    "    <span class=\"date-number\" ng-click=\"click(day)\" ng-mouseover=\"hover(day)\" ng-class=\"{active: day.isActive(), first: day.isFirst(), last: day.isLast(), disabled: day.overflow, today: day.isToday()}\" ng-repeat=\"day in nextMonth\">\n" +
     "      {{ day.date.getDate() }}\n" +
     "    </span>\n" +
     "      </div>\n" +
@@ -363,6 +371,7 @@ angular.module('gtDatePicker').run(['$templateCache', function($templateCache) {
     "    <div class=\"date-picker-bottom\">\n" +
     "      <input type=\"text\" ng-model=\"text.begin\" ng-click=\"setView(begin)\" ng-blur=\"changeBegin(text.begin)\"> -\n" +
     "      <input type=\"text\" ng-model=\"text.end\" ng-click=\"setView(end.lastMonth())\" ng-blur=\"changeEnd(text.end)\">\n" +
+    "\n" +
     "      <div class=\"bottom-button confirm\" ng-click=\"confirm()\">{{ button[0] }}</div>\n" +
     "      <div class=\"bottom-button cancel\" ng-click=\"cancel()\">{{ button[1] }}</div>\n" +
     "      <div style=\"clear: both\"></div>\n" +
